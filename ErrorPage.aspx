@@ -13,6 +13,7 @@
 <body>
     <h1>Oups!</h1>
     <h2>Something went wrong!</h2>
+    <h3>Maybe you put some info that doesn't exist in our database</h3>
     <h3>Please try again!</h3>
     
     <form id="form1" runat="server">

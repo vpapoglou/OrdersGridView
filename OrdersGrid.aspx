@@ -86,26 +86,147 @@
             DataKeyNames="OrderID" DataSourceID="SqlDataSource1" EnableModelValidation="True" style="margin-top: 16px" ForeColor="#333333" GridLines="None" OnRowDeleting="GridView1_RowDeleting" > <%--OnRowCancelingEdit="GridView1_RowCancelingEdit"   OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating"--%>
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ButtonType="Button" CancelText="Cancel" DeleteText="Delete" EditText="Edit" UpdateText="Update" />
 <%--                <asp:TemplateField>
                         <ItemTemplate>
                             <asp:LinkButton ID="lnkdelete" runat="server" CommandName="Delete" >Delete</asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>--%>
+                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ButtonType="Button" CancelText="Cancel" DeleteText="Delete" EditText="Edit" UpdateText="Update" />
                 <asp:BoundField DataField="OrderID" HeaderText="OrderID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" />
-                <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
-                <asp:BoundField DataField="EmployeeID" HeaderText="EmployeeID" SortExpression="EmployeeID" />
-                <asp:BoundField DataField="OrderDate" HeaderText="OrderDate" SortExpression="OrderDate" />
-                <asp:BoundField DataField="RequiredDate" HeaderText="RequiredDate" SortExpression="RequiredDate" />
-                <asp:BoundField DataField="ShippedDate" HeaderText="ShippedDate" SortExpression="ShippedDate" />
-                <asp:BoundField DataField="ShipVia" HeaderText="ShipVia" SortExpression="ShipVia" />
-                <asp:BoundField DataField="Freight" HeaderText="Freight" SortExpression="Freight" />
-                <asp:BoundField DataField="ShipName" HeaderText="ShipName" SortExpression="ShipName" />
-                <asp:BoundField DataField="ShipAddress" HeaderText="ShipAddress" SortExpression="ShipAddress" />
-                <asp:BoundField DataField="ShipCity" HeaderText="ShipCity" SortExpression="ShipCity" />
-                <asp:BoundField DataField="ShipRegion" HeaderText="ShipRegion" SortExpression="ShipRegion" />
-                <asp:BoundField DataField="ShipPostalCode" HeaderText="ShipPostalCode" SortExpression="ShipPostalCode" />
-                <asp:BoundField DataField="ShipCountry" HeaderText="ShipCountry" SortExpression="ShipCountry" />
+                <asp:TemplateField HeaderText="CustomerID" SortExpression="CustomerID">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CustomerID") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvCustomerID" ControlToValidate="TextBox1" ErrorMessage="Please enter a CustomerID" Display="Dynamic" ValidationGroup="vEdit"/>
+                        <asp:RegularExpressionValidator runat="server" ID="erevCustomerID" ControlToValidate="TextBox1" ValidationExpression="^[A-Za-z]{5}$" ErrorMessage="Please enter 5 letters" Display="Dynamic" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("CustomerID") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="EmployeeID" SortExpression="EmployeeID">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="DropDownList1" runat="server" SelectedValue='<%# Bind("EmployeeID") %>'>
+                            <asp:ListItem Text="Davolio" Value="1"/>
+                            <asp:ListItem Text="Fuller" Value="2"/>
+                            <asp:ListItem Text="Leverling" Value="3"/>
+                            <asp:ListItem Text="Peacock" Value="4"/>
+                            <asp:ListItem Text="Buchanan" Value="5"/>
+                            <asp:ListItem Text="Suyama" Value="6"/>
+                            <asp:ListItem Text="King" Value="7"/>
+                            <asp:ListItem Text="Callahan" Value="8"/>
+                            <asp:ListItem Text="Dodsworth" Value="9"/>
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("EmployeeID") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="OrderDate" SortExpression="OrderDate">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("OrderDate") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvOrderDate" ControlToValidate="TextBox2" ErrorMessage="Please enter an Order Date" Display="Dynamic" ValidationGroup="vEdit"/>
+                        <asp:RegularExpressionValidator runat="server" ID="erevOrderDate" ControlToValidate="TextBox2" ValidationExpression="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" ErrorMessage="Please enter Date like XX-XX-XXXX" Display="Dynamic" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="OrderDate" runat="server" Text='<%# Bind("OrderDate") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="RequiredDate" SortExpression="RequiredDate">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("RequiredDate") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvRequiredDate" ControlToValidate="TextBox3" ErrorMessage="Please enter an Required Date" Display="Dynamic" ValidationGroup="vEdit"/>
+                        <asp:RegularExpressionValidator runat="server" ID="erevRequiredDate" ControlToValidate="TextBox3" ValidationExpression="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" ErrorMessage="Please enter Date like XX-XX-XXXX" Display="Dynamic" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("RequiredDate") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShippedDate" SortExpression="ShippedDate">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("ShippedDate") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvShippedDate" ControlToValidate="TextBox4" ErrorMessage="Please enter a Shipped Date" Display="Dynamic" ValidationGroup="vEdit"/>
+                        <asp:RegularExpressionValidator runat="server" ID="erevShippedDate" ControlToValidate="TextBox4" ValidationExpression="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" ErrorMessage="Please enter Date like XX-XX-XXXX" Display="Dynamic" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("ShippedDate") %>'></asp:Label>                        
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShipVia" SortExpression="ShipVia">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="DropDownList2" runat="server" SelectedValue='<%# Bind("ShipVia") %>'>
+                            <asp:ListItem Text="Speedy Express" Value="1"/>
+                            <asp:ListItem Text="United Package" Value="2"/>
+                            <asp:ListItem Text="Federal Shipping" Value="3"/>
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("ShipVia") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Freight" SortExpression="Freight">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Freight") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvFreight" ControlToValidate="TextBox5" ErrorMessage="Please enter a Freight" ValidationGroup="vEdit" Display="Dynamic"/>
+                        <asp:RegularExpressionValidator runat="server" ID="erefFreight" ControlToValidate="TextBox5" ValidationExpression="\d+(\.\d{1,5})?" ErrorMessage="Please enter Freight number like (*).XXXXX"/><br /><br />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("Freight") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShipName" SortExpression="ShipName">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("ShipName") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvShipName" ControlToValidate="TextBox6" ErrorMessage="Please enter a Ship Name" Display="Dynamic" ValidationGroup="vEdit"/>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label8" runat="server" Text='<%# Bind("ShipName") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShipAddress" SortExpression="ShipAddress">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("ShipAddress") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvShipAddress" ControlToValidate="TextBox7" ErrorMessage="Please enter a Ship Address" Display="Dynamic" ValidationGroup="vEdit"/>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label9" runat="server" Text='<%# Bind("ShipAddress") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShipCity" SortExpression="ShipCity">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("ShipCity") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvShipCity" ControlToValidate="TextBox8" ErrorMessage="Please enter a Ship City" Display="Dynamic" ValidationGroup="vEdit"/>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("ShipCity") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShipRegion" SortExpression="ShipRegion">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("ShipRegion") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvShipRegion" ControlToValidate="TextBox9" ErrorMessage="Please enter a Ship Region" Display="Dynamic" ValidationGroup="vEdit"/>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label11" runat="server" Text='<%# Bind("ShipRegion") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShipPostalCode" SortExpression="ShipPostalCode">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox10" runat="server" Text='<%# Bind("ShipPostalCode") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvShipPostalCode" ControlToValidate="TextBox10" ErrorMessage="Please enter a Ship Postal Code" Display="Dynamic" ValidationGroup="vEdit"/>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label12" runat="server" Text='<%# Bind("ShipPostalCode") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="ShipCountry" SortExpression="ShipCountry">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox11" runat="server" Text='<%# Bind("ShipCountry") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ID="erfvShipCountry" ControlToValidate="TextBox11" ErrorMessage="Please enter a Ship Country" Display="Dynamic" ValidationGroup="vEdit"/>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label13" runat="server" Text='<%# Bind("ShipCountry") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
             <EditRowStyle BackColor="#2461BF" />
             <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
